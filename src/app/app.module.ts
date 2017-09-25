@@ -6,25 +6,44 @@ import { StatusBar } from '@ionic-native/status-bar';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
+import {BLE} from "@ionic-native/ble";
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { AngularFireAuthModule } from 'angularfire2/auth';
+import {StudentsService} from "../services/students.service";
+
+export const firebaseConfig = {
+    apiKey: "AIzaSyClGHAxQZ_4h7h31tuLfrMxmPNeyskDWP8",
+    authDomain: "btcheck-2fe40.firebaseapp.com",
+    databaseURL: "https://btcheck-2fe40.firebaseio.com",
+    projectId: "btcheck-2fe40",
+    storageBucket: "btcheck-2fe40.appspot.com",
+    messagingSenderId: "576305456501"
+};
 
 @NgModule({
-  declarations: [
-    MyApp,
-    HomePage
-  ],
-  imports: [
-    BrowserModule,
-    IonicModule.forRoot(MyApp)
-  ],
-  bootstrap: [IonicApp],
-  entryComponents: [
-    MyApp,
-    HomePage
-  ],
-  providers: [
-    StatusBar,
-    SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
-  ]
+    declarations: [
+        MyApp,
+        HomePage
+    ],
+    imports: [
+        BrowserModule,
+        IonicModule.forRoot(MyApp),
+        AngularFireModule.initializeApp(firebaseConfig),
+        AngularFireDatabaseModule,
+        AngularFireAuthModule
+    ],
+    bootstrap: [IonicApp],
+    entryComponents: [
+        MyApp,
+        HomePage
+    ],
+    providers: [
+        StatusBar,
+        SplashScreen,
+        {provide: ErrorHandler, useClass: IonicErrorHandler},
+        BLE,
+        StudentsService
+    ]
 })
 export class AppModule {}
