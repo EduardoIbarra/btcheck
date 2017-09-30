@@ -1,0 +1,22 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>
+            Clases
+        </ion-title>
+        <ion-buttons end>
+            <button ion-button (click)="showAddClass()">
+                Agregar
+            </button>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+
+<ion-content>
+    <ion-list>
+        <ion-item *ngFor="let class of classes">
+            <h2>{{class.name}}</h2>
+            <p>{{class.description}}</p>
+        </ion-item>
+    </ion-list>
+    <p>{{ statusMessage }}</p>
+</ion-content>

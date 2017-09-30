@@ -1,0 +1,29 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>Checar Asistencia</ion-title>
+        <ion-buttons *ngIf="class" end>
+            <button ion-button (click)="scan()">
+                Empezar
+            </button>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+<ion-content>
+    <ion-list>
+        <ion-item>
+            <ion-label>Clase</ion-label>
+            <ion-select [(ngModel)]="class" (ionChange)="classChanged()">
+                <ion-option *ngFor="let class of classes" [value]="class">{{class.name}}</ion-option>
+            </ion-select>
+        </ion-item>
+    </ion-list>
+    <ion-list *ngIf="class">
+        <ion-list-header>
+            Estudiantes
+        </ion-list-header>
+        <ion-item *ngFor="let student of class.students" (click)="toggleSelection(student)">
+            <h2><ion-icon *ngIf="student.checked" name="checkbox"></ion-icon> {{student.last_name}} {{student.name}}</h2>
+            <p>{{student.school_id}}</p>
+        </ion-item>
+    </ion-list>
+</ion-content>

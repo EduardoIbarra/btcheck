@@ -1,0 +1,35 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>Grupo</ion-title>
+        <ion-buttons end>
+            <button ion-button (click)="save()">
+                Guardar
+            </button>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+
+
+<ion-content>
+    <ion-list>
+        <ion-item>
+            <ion-label>Nombre</ion-label>
+            <ion-input type="text" [(ngModel)]="group.name"></ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-label>Descripción</ion-label>
+            <ion-textarea [(ngModel)]="group.description"></ion-textarea>
+        </ion-item>
+    </ion-list>
+
+    <ion-list>
+        <ion-list-header>
+            Estudiantes
+        </ion-list-header>
+        <ion-item *ngFor="let student of students" (click)="toggleSelection(student)">
+            <h2><ion-icon *ngIf="student.selected" name="checkbox"></ion-icon> {{student.last_name}} {{student.name}}</h2>
+            <p>{{student.school_id}}</p>
+        </ion-item>
+    </ion-list>
+</ion-content>

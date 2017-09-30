@@ -1,7 +1,7 @@
 <ion-header>
     <ion-navbar>
         <ion-title>
-            BLE Scanner
+            Registrar Dispositivo
         </ion-title>
         <ion-buttons end>
             <button ion-button (click)="scan()">
@@ -19,10 +19,5 @@
             <p>RSSI: {{ device.rssi }}</p>
         </button>
     </ion-list>
+    <p>{{ statusMessage }}</p>
 </ion-content>
-
-<ion-footer>
-    <ion-toolbar>
-        <p>{{ statusMessage }}</p>
-    </ion-toolbar>
-</ion-footer>
