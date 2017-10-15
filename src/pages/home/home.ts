@@ -10,23 +10,7 @@ import {StudentsService} from "../../services/students.service";
 })
 export class HomePage {
 
-    devices: any[] = [
-        {
-            name: 1,
-            id: 1,
-            rssi: 1
-        },
-        {
-            name: 2,
-            id: 2,
-            rssi: 2
-        },
-        {
-            name: 3,
-            id: 3,
-            rssi: 3
-        }
-    ];
+    devices: any[] = [];
     statusMessage: string;
     students: any[] = [];
 

@@ -2,6 +2,7 @@ import {Component, NgZone} from '@angular/core';
 import {IonicPage, NavController, NavParams, AlertController, ToastController} from 'ionic-angular';
 import {ClassesService} from "../../services/classes.service";
 import {BLE} from "@ionic-native/ble";
+import {AttendancesService} from "../../services/attendance.service";
 
 /**
  * Generated class for the CheckPage page.
@@ -28,6 +29,7 @@ export class CheckPage {
         private ble: BLE,
         private ngZone: NgZone,
         private alertCtrl: AlertController,
+        private attendancesService: AttendancesService
     ) {
         classesService.getClasses()
             .subscribe((result)=>{
@@ -57,6 +59,11 @@ export class CheckPage {
         console.log('Discovered ' + JSON.stringify(device, null, 2));
         this.ngZone.run(() => {
             this.devices.push(device);
+            this.class.students.forEach((s)=>{
+               if(s.bluetooth_id == device.id){
+                   s.checked = true;
+               }
+            });
         });
     }
 
@@ -69,5 +76,22 @@ export class CheckPage {
             duration: 5000
         });
         toast.present();
+    }
+
+    save(){
+        this.class.attendances_id = Date.now();
+        this.attendancesService.createAttendance(this.class)
+            .then(
+                (result)=>{
+                    alert('Lista guardada con éxito');
+                    console.log(result);
+                }
+            )
+            .catch(
+                (error)=>{
+                    console.log(error);
+                    alert('Ocurrió un error');
+                }
+            );
     }
 }

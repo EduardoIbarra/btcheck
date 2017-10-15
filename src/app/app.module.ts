@@ -16,6 +16,11 @@ import {ClassesPage} from "../pages/classes/classes";
 import {GroupPage} from "../pages/group/group";
 import {ClassesService} from "../services/classes.service";
 import {CheckPage} from "../pages/check/check";
+import {AttendancesService} from "../services/attendance.service";
+import {AboutPage} from "../pages/about/about";
+import {AttendanceModalPage} from "../pages/attendance-modal/attendance-modal";
+import {LoginModalPage} from "../pages/login-modal/login-modal";
+import {AuthorizationService} from "../services/authorization.service";
 
 export const firebaseConfig = {
     apiKey: "AIzaSyClGHAxQZ_4h7h31tuLfrMxmPNeyskDWP8",
@@ -34,7 +39,10 @@ export const firebaseConfig = {
         TabsPage,
         ClassesPage,
         GroupPage,
-        CheckPage
+        CheckPage,
+        AboutPage,
+        AttendanceModalPage,
+        LoginModalPage
     ],
     imports: [
         BrowserModule,
@@ -51,7 +59,10 @@ export const firebaseConfig = {
         TabsPage,
         ClassesPage,
         GroupPage,
-        CheckPage
+        CheckPage,
+        AboutPage,
+        AttendanceModalPage,
+        LoginModalPage
     ],
     providers: [
         StatusBar,
@@ -59,7 +70,9 @@ export const firebaseConfig = {
         {provide: ErrorHandler, useClass: IonicErrorHandler},
         BLE,
         StudentsService,
-        ClassesService
+        ClassesService,
+        AttendancesService,
+        AuthorizationService
     ]
 })
 export class AppModule {}

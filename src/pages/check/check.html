@@ -1,5 +1,5 @@
 <ion-header>
-    <ion-navbar>
+    <ion-navbar color="secondary">
         <ion-title>Checar Asistencia</ion-title>
         <ion-buttons *ngIf="class" end>
             <button ion-button (click)="scan()">
@@ -26,4 +26,7 @@
             <p>{{student.school_id}}</p>
         </ion-item>
     </ion-list>
+    <ion-fab right bottom>
+        <button ion-fab color="danger" (click)="save()"><ion-icon ios="ios-cloud-upload" md="md-cloud-upload"></ion-icon></button>
+    </ion-fab>
 </ion-content>

@@ -35,9 +35,9 @@ $app-direction: ltr;
 
 $colors: (
   primary:    #488aff,
-  secondary:  #32db64,
+  secondary:  #403a33,
   danger:     #f53d3d,
-  light:      #f4f4f4,
+  light:      #fef336,
   dark:       #222
 );
 
@@ -86,3 +86,15 @@ $colors: (
 
 @import "roboto";
 @import "noto-sans";
+.toolbar-ios-secondary .toolbar-title-ios, .toolbar-ios-secondary .bar-button-clear-ios, .toolbar-ios-secondary .bar-button-default-ios {
+  color: #fef336 !important;
+}
+.tabs-ios-secondary .tab-button[aria-selected=true], .tabs-ios-secondary .tab-button[aria-selected=true] .tab-button-icon {
+  color: #fef336 !important;
+}
+.center{
+  text-align: center !important;
+}
+#about-logo{
+  width: 40%;
+}

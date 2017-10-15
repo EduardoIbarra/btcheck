@@ -1,0 +1,45 @@
+<ion-header>
+    <ion-navbar color="secondary">
+        <ion-title>Login/Registro</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content>
+    <br />
+    <div class="center">
+        <img src="assets/bluetooth-3.png" id="about-logo" />
+    </div>
+    <br /><br />
+    <ion-list>
+        <ion-item *ngIf="!isRegistered">
+            <ion-label fixed>Nombre</ion-label>
+            <ion-input type="text" [(ngModel)]="formHelper.name" value=""></ion-input>
+        </ion-item>
+        <ion-item *ngIf="!isRegistered">
+            <ion-label fixed>Escuela</ion-label>
+            <ion-input type="text" [(ngModel)]="formHelper.school" value=""></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label fixed>Email</ion-label>
+            <ion-input type="email" [(ngModel)]="formHelper.email" value=""></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label fixed>Contraseña</ion-label>
+            <ion-input type="password" [(ngModel)]="formHelper.password"></ion-input>
+        </ion-item>
+        <div padding>
+            <div (click)="toggleRegistered()" class="center">
+                <b *ngIf="!isRegistered">Ya tienes cuenta? Ingresa!</b>
+                <b *ngIf="isRegistered">Aun no tienes cuenta? Regístrate!</b>
+            </div>
+            <br />
+            <button ion-button block color="secondary" (click)="ok()">Ok</button>
+            <hr />
+            <br />
+            <div class="center">
+                <b>ó</b>
+            </div>
+            <button ion-button block color="primary" (click)="loginWithFacebook()">Ingresar con Facebook</button>
+        </div>
+    </ion-list>
+</ion-content>

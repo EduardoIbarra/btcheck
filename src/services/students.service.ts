@@ -3,21 +3,24 @@ import {AngularFireDatabase} from "angularfire2/database/database";
 
 @Injectable()
 export class StudentsService{
-    constructor(public afDB: AngularFireDatabase){}
+    uid:string = null;
+    constructor(public afDB: AngularFireDatabase){
+        this.uid = localStorage.getItem('uid');
+    }
     students = [];
     public getStudents(){
-        return this.afDB.list('students/');
+        return this.afDB.list(this.uid+'/'+'students/');
     }
     public getStudent(id){
-        return this.afDB.object('students/'+id);
+        return this.afDB.object(this.uid+'/'+'students/'+id);
     }
     public createStudent(student){
-        return this.afDB.database.ref('students/'+student.school_id).set(student);
+        return this.afDB.database.ref(this.uid+'/'+'students/'+student.school_id).set(student);
     }
     public editStudent(student){
-        this.afDB.database.ref('students/'+student.school_id).set(student);
+        this.afDB.database.ref(this.uid+'/'+'students/'+student.school_id).set(student);
     }
     public deleteStudent(student){
-        this.afDB.database.ref('students/'+student.school_id).remove();
+        this.afDB.database.ref(this.uid+'/'+'students/'+student.school_id).remove();
     }
 }

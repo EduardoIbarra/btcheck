@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      Asistencia
+    </ion-title>
+    <ion-buttons start>
+      <button ion-button (click)="dismiss()">
+        <span ion-text color="primary" showWhen="ios">Cerrar</span>
+        <ion-icon name="md-close" showWhen="android,windows"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item>
+      <ion-label>{{attendance.name}} - {{attendance.attendances_id | date:'medium'}}</ion-label>
+    </ion-item>
+  </ion-list>
+  <ion-list>
+    <ion-list-header>
+      Estudiantes
+    </ion-list-header>
+    <ion-item *ngFor="let student of attendance.students" (click)="toggleSelection(student)">
+      <h2><ion-icon *ngIf="student.checked" name="checkbox"></ion-icon> {{student.last_name}} {{student.name}}</h2>
+      <p>{{student.school_id}}</p>
+    </ion-item>
+  </ion-list>
+</ion-content>
