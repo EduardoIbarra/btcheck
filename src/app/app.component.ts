@@ -20,16 +20,16 @@ export class MyApp {
         platform.ready().then(() => {
             statusBar.styleDefault();
             splashScreen.hide();
-            let modal = this.modalCtrl.create(LoginModalPage);
-            this.authorizationService.isLogged().subscribe((result) => {
-                if(result && result.uid){
-                    console.log('User is logged in');
-                }else{
-                    modal.present();
-                }
-            }, (error) => {
-                modal.present();
-            });
+            // let modal = this.modalCtrl.create(LoginModalPage);
+            // this.authorizationService.isLogged().subscribe((result) => {
+            //     if(result && result.uid){
+            //         console.log('User is logged in');
+            //     }else{
+            //         modal.present();
+            //     }
+            // }, (error) => {
+            //     modal.present();
+            // });
         });
     }
 }

@@ -9,18 +9,18 @@ export class AttendancesService{
     }
     attendances = [];
     public getAttendances(){
-        return this.afDB.list(this.uid+'/'+'attendances/');
+        return this.afDB.list(localStorage.getItem('uid')+'/'+'attendances/');
     }
     public getAttendance(id){
-        return this.afDB.object(this.uid+'/'+'attendances/'+id);
+        return this.afDB.object(localStorage.getItem('uid')+'/'+'attendances/'+id);
     }
     public createAttendance(attendance){
-        return this.afDB.database.ref(this.uid+'/'+'attendances/'+attendance.attendances_id).set(attendance);
+        return this.afDB.database.ref(localStorage.getItem('uid')+'/'+'attendances/'+attendance.attendances_id).set(attendance);
     }
     public editAttendance(attendance){
-        this.afDB.database.ref(this.uid+'/'+'attendances/'+attendance.attendances_id).set(attendance);
+        this.afDB.database.ref(localStorage.getItem('uid')+'/'+'attendances/'+attendance.attendances_id).set(attendance);
     }
     public deleteAttendance(attendance){
-        this.afDB.database.ref(this.uid+'/'+'attendances/'+attendance.attendances_id).remove();
+        this.afDB.database.ref(localStorage.getItem('uid')+'/'+'attendances/'+attendance.attendances_id).remove();
     }
 }

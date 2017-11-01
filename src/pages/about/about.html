@@ -1,51 +1,54 @@
 <ion-header>
-  <ion-navbar color="secondary">
-    <ion-title>Acerca De</ion-title>
-  </ion-navbar>
+    <ion-navbar color="secondary">
+        <ion-title>Acerca De</ion-title>
+    </ion-navbar>
 </ion-header>
 
 
 <ion-content padding>
-  <div class="center">
-    <img src="assets/bluetooth-3.png" id="about-logo" />
-  </div>
-  <ion-card>
-    <ion-card-header>
-      BT Check
-    </ion-card-header>
+    <div class="center">
+        <img src="assets/bluetooth-3.png" id="about-logo" />
+    </div>
+    <ion-card>
+        <ion-card-header>
+            BT Check
+        </ion-card-header>
 
-    <ion-card-content>
-      <b>BT Check</b> es un app desarrollada para tomar asistencia en el salón de clases de una manera muy rápida,
-      aprovechando el uso de smartphones.
-    </ion-card-content>
-  </ion-card>
+        <ion-card-content>
+            <b>BT Check</b> es un app desarrollada para tomar asistencia en el salón de clases de una manera muy rápida,
+            aprovechando el uso de smartphones.
+        </ion-card-content>
+    </ion-card>
 
-  <ion-card>
-    <ion-card-header>
-      Integrantes
-    </ion-card-header>
+    <ion-card>
+        <ion-card-header>
+            Integrantes
+        </ion-card-header>
 
-    <ion-list>
-      <button ion-item>
-        <ion-icon name="bluetooth" item-start></ion-icon>
-        Roberto Herrera Rodríguez
-      </button>
+        <ion-list>
+            <button ion-item>
+                <ion-icon name="bluetooth" item-start></ion-icon>
+                Roberto Herrera Rodríguez
+            </button>
 
-      <button ion-item>
-        <ion-icon name="bluetooth" item-start></ion-icon>
-        Marcelo Madero Ortiz
-      </button>
+            <button ion-item>
+                <ion-icon name="bluetooth" item-start></ion-icon>
+                Marcelo Madero Ortiz
+            </button>
 
-      <button ion-item>
-        <ion-icon name="bluetooth" item-start></ion-icon>
-        Diego Montoya Chávez
-      </button>
+            <button ion-item>
+                <ion-icon name="bluetooth" item-start></ion-icon>
+                Diego Montoya Chávez
+            </button>
 
-      <button ion-item>
-        <ion-icon name="bluetooth" item-start></ion-icon>
-        Rebeca Palma Pérez
-      </button>
+            <button ion-item>
+                <ion-icon name="bluetooth" item-start></ion-icon>
+                Rebeca Palma Pérez
+            </button>
 
-    </ion-list>
-  </ion-card>
+        </ion-list>
+    </ion-card>
+    <div padding>
+        <button ion-button block color="danger" (click)="logout()">Logout</button>
+    </div>
 </ion-content>
