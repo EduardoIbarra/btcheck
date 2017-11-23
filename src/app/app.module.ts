@@ -28,7 +28,7 @@ export const firebaseConfig = {
     databaseURL: "https://btcheck-2fe40.firebaseio.com",
     projectId: "btcheck-2fe40",
     storageBucket: "btcheck-2fe40.appspot.com",
-    messagingSenderId: "576305456501"
+    messagingSenderId: "576305456501",
 };
 
 @NgModule({
