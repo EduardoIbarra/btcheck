@@ -1,0 +1,34 @@
+<div class="center">
+    <img src="assets/bluetooth-3.png" id="about-logo" />
+</div>
+<br /><br />
+<div *ngIf="!isRegistered">
+    <label >Nombre</label>
+    <input type="text" [(ngModel)]="formHelper.name" value="">
+</div>
+<div *ngIf="!isRegistered">
+    <label >Escuela</label>
+    <input type="text" [(ngModel)]="formHelper.school" value="">
+</div>
+<div>
+    <label >Email</label>
+    <input type="email" [(ngModel)]="formHelper.email" value="">
+</div>
+<div>
+    <label >Contraseña</label>
+    <input type="password" [(ngModel)]="formHelper.password">
+</div>
+<div>
+    <div (click)="toggleRegistered()" class="center">
+        <b *ngIf="!isRegistered">Ya tienes cuenta? Ingresa!</b>
+        <b *ngIf="isRegistered">Aun no tienes cuenta? Regístrate!</b>
+    </div>
+    <br />
+    <button (click)="ok()">Ok</button>
+    <hr />
+    <br />
+    <div class="center">
+        <b>ó</b>
+    </div>
+    <button (click)="loginWithFacebook()">Ingresar con Facebook</button>
+</div>

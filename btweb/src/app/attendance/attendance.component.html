@@ -1,0 +1,17 @@
+<div>
+    <div>
+        <select [(ngModel)]="class">
+            <option *ngFor="let class of classes" [value]="class.class_id">{{class.name}}</option>
+        </select>
+        <a (click)="getQR()">Comenzar</a>
+        <br />
+        <a target="_blank" href="{{this.qrUrl}}"><img src="{{this.qrUrl}}" /></a>
+    </div>
+    <hr />
+    <div>
+        <div *ngFor="let attendance of attendances" (click)="openAttendance({data: attendance})">
+            <h2>{{attendance.name}}</h2>
+            <p>{{attendance.attendances_id | date:'medium'}}</p>
+        </div>
+    </div>
+</div>
