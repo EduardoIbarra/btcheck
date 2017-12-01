@@ -22,9 +22,9 @@
         </div>
         <hr />
         <div>
-            <div *ngFor="let attendance of attendances" (click)="openAttendance({data: attendance})">
-                <h2>{{attendance.name}}</h2>
-                <p>{{attendance.attendances_id | date:'medium'}}</p>
+            <div *ngFor="let student of students" (click)="openStudent({data: student})">
+                <h2>{{student.name}}</h2>
+                <p>{{student.students_id | date:'medium'}}</p>
             </div>
         </div>
     </div>
