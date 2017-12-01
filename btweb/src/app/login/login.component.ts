@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import {AuthorizationService} from '../services/authorization.service';
+import {Router} from "@angular/router";
 
 /**
  * Generated class for the LoginModalPage page.
@@ -20,7 +21,8 @@ export class LoginComponent {
         password: null
     };
     isRegistered = false;
-    constructor(public authorizationService: AuthorizationService) {
+    constructor(public authorizationService: AuthorizationService,
+                private router: Router) {
     }
 
     ionViewDidLoad() {
@@ -55,6 +57,7 @@ export class LoginComponent {
                 alert('Registrado Correctamente');
                 console.log(response);
                 localStorage.setItem('uid', response.uid);
+                this.router.navigate(['attendance'])
             })
             .catch((error) => {
                 alert('Ocurrió un error');
@@ -67,6 +70,7 @@ export class LoginComponent {
                 alert('Loggeado Correctamente');
                 console.log(response);
                 localStorage.setItem('uid', response.uid);
+                this.router.navigate(['attendance'])
             })
             .catch((error) => {
                 alert('Ocurrió un error');

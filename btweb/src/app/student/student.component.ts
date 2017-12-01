@@ -1,24 +1,29 @@
 import { Component } from '@angular/core';
-import {AttendancesService} from '../firebase.service';
 import {ClassesService} from '../services/classes.service';
+import {StudentsService} from "../services/students.service";
 
 @Component({
-    selector: 'app-attendance',
-    templateUrl: 'attendance.component.html'
+    selector: 'app-student',
+    templateUrl: 'student.component.html'
 })
-export class AttendanceComponent {
-    attendances: any [];
+export class StudentComponent {
+    students: any [];
     classes: any [];
     class: any;
     date: number;
     qrUrl: string;
+    student: any = {
+        school_id: null,
+        firstName: null,
+        lastName: null
+    };
     constructor(
-        public attendancesService: AttendancesService,
+        public studentsService: StudentsService,
         public classesService: ClassesService
     ) {
-        attendancesService.getAttendances().valueChanges()
+        studentsService.getStudents().valueChanges()
             .subscribe((result) => {
-                this.attendances = result;
+                this.students = result;
             }, (error) => {
                 alert('Ocurrió un error');
                 console.log(error);
@@ -33,18 +38,31 @@ export class AttendanceComponent {
         this.date = Date.now();
         const qrCode = localStorage.getItem('uid') + '||' + this.date;
         this.qrUrl = 'https://api.qrserver.com/v1/create-qr-code/?size=900x900&data=' + qrCode;
-        const attendance = {
-            attendance_id: this.date,
+        const student = {
+            student_id: this.date,
             class: this.class,
             qrUrl: this.qrUrl,
             qrCode: qrCode
         };
         console.log(this.class);
-        this.attendancesService.createAttendance(attendance).then((result) => {
+        this.studentsService.createStudent(student).then((result) => {
             alert('Pase de lista en curso...');
         });
         console.log(this.qrUrl);
     }
-    openAttendance(attendance) {
+    openStudent(student) {
+    }
+    saveStudent(){
+        this.studentsService.createStudent(this.student).then((result) => {
+            alert('Estudiante guardado con éxito');
+        });
+    }
+    editStudent(s){
+        this.student = s;
+    }
+    deleteStudent(s){
+        this.studentsService.deleteStudent(s).then(()=>{
+            alert('Estudiante eliminado con éxito');
+        });
     }
 }

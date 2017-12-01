@@ -12,6 +12,9 @@ import {FormsModule} from '@angular/forms';
 import {ClassesService} from './services/classes.service';
 import {AuthorizationService} from './services/authorization.service';
 import {LoginComponent} from './login/login.component';
+import {StudentsService} from "./services/students.service";
+import {StudentComponent} from "./student/student.component";
+import {ClaseComponent} from "./clase/clase.component";
 
 export const firebaseConfig = {
     apiKey: 'AIzaSyClGHAxQZ_4h7h31tuLfrMxmPNeyskDWP8',
@@ -25,6 +28,8 @@ export const firebaseConfig = {
 const appRoutes: Routes = [
     {path: '', redirectTo: 'login', pathMatch: 'full'},
     {path: 'attendance', component: AttendanceComponent},
+    {path: 'student', component: StudentComponent},
+    {path: 'clase', component: ClaseComponent},
     {path: 'login', component: LoginComponent}
 ];
 
@@ -32,7 +37,9 @@ const appRoutes: Routes = [
     declarations: [
         AppComponent,
         AttendanceComponent,
-        LoginComponent
+        StudentComponent,
+        LoginComponent,
+        ClaseComponent
     ],
     imports: [
         BrowserModule,
@@ -42,7 +49,7 @@ const appRoutes: Routes = [
         RouterModule.forRoot(appRoutes),
         FormsModule
     ],
-    providers: [AttendancesService, ClassesService, AuthorizationService, AttendancesService],
+    providers: [AttendancesService, ClassesService, AuthorizationService, AttendancesService, StudentsService],
     bootstrap: [AppComponent]
 })
 export class AppModule { }

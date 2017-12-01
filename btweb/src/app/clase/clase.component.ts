@@ -1,24 +1,27 @@
 import { Component } from '@angular/core';
-import {AttendancesService} from '../firebase.service';
 import {ClassesService} from '../services/classes.service';
 
 @Component({
-    selector: 'app-attendance',
-    templateUrl: 'attendance.component.html'
+    selector: 'app-clase',
+    templateUrl: 'clase.component.html'
 })
-export class AttendanceComponent {
-    attendances: any [];
+export class ClaseComponent {
+    clases: any [];
     classes: any [];
     class: any;
     date: number;
     qrUrl: string;
+    clase: any = {
+        school_id: null,
+        firstName: null,
+        lastName: null
+    };
     constructor(
-        public attendancesService: AttendancesService,
         public classesService: ClassesService
     ) {
-        attendancesService.getAttendances().valueChanges()
+        classesService.getClasses().valueChanges()
             .subscribe((result) => {
-                this.attendances = result;
+                this.clases = result;
             }, (error) => {
                 alert('Ocurrió un error');
                 console.log(error);
@@ -33,18 +36,31 @@ export class AttendanceComponent {
         this.date = Date.now();
         const qrCode = localStorage.getItem('uid') + '||' + this.date;
         this.qrUrl = 'https://api.qrserver.com/v1/create-qr-code/?size=900x900&data=' + qrCode;
-        const attendance = {
-            attendance_id: this.date,
+        const clase = {
+            clase_id: this.date,
             class: this.class,
             qrUrl: this.qrUrl,
             qrCode: qrCode
         };
         console.log(this.class);
-        this.attendancesService.createAttendance(attendance).then((result) => {
+        this.classesService.createClass(clase).then((result) => {
             alert('Pase de lista en curso...');
         });
         console.log(this.qrUrl);
     }
-    openAttendance(attendance) {
+    openClase(clase) {
+    }
+    saveClase(){
+        this.classesService.createClass(this.clase).then((result) => {
+            alert('Estudiante guardado con éxito');
+        });
+    }
+    editClase(s){
+        this.clase = s;
+    }
+    deleteClase(s){
+        this.classesService.deleteClass(s).then(()=>{
+            alert('Estudiante eliminado con éxito');
+        });
     }
 }

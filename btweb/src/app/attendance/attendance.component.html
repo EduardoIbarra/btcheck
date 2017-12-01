@@ -1,17 +1,31 @@
-<div>
+<div class="container">
     <div>
-        <select [(ngModel)]="class">
-            <option *ngFor="let class of classes" [value]="class.class_id">{{class.name}}</option>
-        </select>
-        <a (click)="getQR()">Comenzar</a>
-        <br />
-        <a target="_blank" href="{{this.qrUrl}}"><img src="{{this.qrUrl}}" /></a>
-    </div>
-    <hr />
-    <div>
-        <div *ngFor="let attendance of attendances" (click)="openAttendance({data: attendance})">
-            <h2>{{attendance.name}}</h2>
-            <p>{{attendance.attendances_id | date:'medium'}}</p>
+        <h3>Pasar Lista</h3>
+        <div class="row">
+            <div class="col-md-8">
+                <select [(ngModel)]="class" class="form-control">
+                    <option *ngFor="let class of classes" [value]="class.class_id">{{class.name}}</option>
+                </select>
+            </div>
+            <div class="col-md-4">
+                <a (click)="getQR()" class="btn btn-primary btn-block">Comenzar</a>
+            </div>
+        </div>
+        <div class="row" *ngIf="this.qrUrl">
+            <div class="col-md-offset-4 col-md-4 center">
+                <br />
+                (Click en la imagen para agrandarla)
+                <div class="well">
+                    <a target="_blank" href="{{this.qrUrl}}"><img src="{{this.qrUrl}}" class="img-responsive" /></a>
+                </div>
+            </div>
+        </div>
+        <hr />
+        <div>
+            <div *ngFor="let attendance of attendances" (click)="openAttendance({data: attendance})">
+                <h2>{{attendance.name}}</h2>
+                <p>{{attendance.attendances_id | date:'medium'}}</p>
+            </div>
         </div>
     </div>
 </div>

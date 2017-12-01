@@ -21,6 +21,6 @@ export class ClassesService{
         this.afDB.database.ref(this.uid + '/' + 'classes/' + my_class.class_id).set(my_class);
     }
     public deleteClass(my_class){
-        this.afDB.database.ref(this.uid + '/' + 'classes/' + my_class.class_id).remove();
+        return this.afDB.database.ref(this.uid + '/' + 'classes/' + my_class.class_id).remove();
     }
 }
