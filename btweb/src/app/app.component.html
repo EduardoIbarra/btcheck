@@ -16,9 +16,11 @@
             <ul class="nav navbar-nav">
                 <li class="active"><a routerLink="attendance">Asistencia <span class="sr-only">(current)</span></a></li>
                 <li><a routerLink="student">Estudiantes</a></li>
+                <li><a routerLink="clase">Clases</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li><a routerLink="login">Login</a></li>
+                <li><a (click)="logout()">Logout</a></li>
             </ul>
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->

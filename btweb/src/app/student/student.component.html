@@ -1,31 +1,43 @@
 <div class="container">
     <div>
-        <h3>Pasar Lista</h3>
+        <h3>Crear Estudiante</h3>
         <div class="row">
-            <div class="col-md-8">
-                <select [(ngModel)]="class" class="form-control">
-                    <option *ngFor="let class of classes" [value]="class.class_id">{{class.name}}</option>
-                </select>
+            <div class="col-md-3">
+                <label>Matrícula</label>
+                <input type="text" class="form-control" [(ngModel)]="student.school_id">
             </div>
-            <div class="col-md-4">
-                <a (click)="getQR()" class="btn btn-primary btn-block">Comenzar</a>
+            <div class="col-md-3">
+                <label>Nombre(s)</label>
+                <input type="text" class="form-control" [(ngModel)]="student.firstName">
             </div>
-        </div>
-        <div class="row" *ngIf="this.qrUrl">
-            <div class="col-md-offset-4 col-md-4 center">
+            <div class="col-md-3">
+                <label>Apellido(s)</label>
+                <input type="text" class="form-control" [(ngModel)]="student.lastName">
+            </div>
+            <div class="col-md-3">
                 <br />
-                (Click en la imagen para agrandarla)
-                <div class="well">
-                    <a target="_blank" href="{{this.qrUrl}}"><img src="{{this.qrUrl}}" class="img-responsive" /></a>
-                </div>
+                <a (click)="saveStudent()" class="btn btn-primary btn-block">Guardar</a>
             </div>
         </div>
         <hr />
         <div>
-            <div *ngFor="let student of students" (click)="openStudent({data: student})">
-                <h2>{{student.name}}</h2>
-                <p>{{student.students_id | date:'medium'}}</p>
-            </div>
+            <h2>Estudiantes</h2>
+            <table class="table table-bordered table-condensed table-striped">
+                <tr>
+                    <th>Matrícula</th>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+                <tr *ngFor="let s of students" class="center">
+                    <td>{{s.school_id}}</td>
+                    <td>{{s.firstName}}</td>
+                    <td>{{s.lastName}}</td>
+                    <td><a (click)="editStudent(s)"><span class="glyphicon glyphicon-edit"></span></a></td>
+                    <td><a (click)="deleteStudent(s)"><span class="glyphicon glyphicon-remove"></span></a></td>
+                </tr>
+            </table>
         </div>
     </div>
 </div>

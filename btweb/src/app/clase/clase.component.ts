@@ -1,29 +1,27 @@
 import { Component } from '@angular/core';
 import {ClassesService} from '../services/classes.service';
-import {StudentsService} from "../services/students.service";
 
 @Component({
-    selector: 'app-student',
-    templateUrl: 'student.component.html'
+    selector: 'app-clase',
+    templateUrl: 'clase.component.html'
 })
-export class StudentComponent {
-    students: any [];
+export class ClaseComponent {
+    clases: any [];
     classes: any [];
     class: any;
     date: number;
     qrUrl: string;
-    student: any = {
+    clase: any = {
         school_id: null,
         firstName: null,
         lastName: null
     };
     constructor(
-        public studentsService: StudentsService,
         public classesService: ClassesService
     ) {
-        studentsService.getStudents().valueChanges()
+        classesService.getClasses().valueChanges()
             .subscribe((result) => {
-                this.students = result;
+                this.clases = result;
             }, (error) => {
                 alert('Ocurrió un error');
                 console.log(error);
@@ -38,30 +36,30 @@ export class StudentComponent {
         this.date = Date.now();
         const qrCode = localStorage.getItem('uid') + '||' + this.date;
         this.qrUrl = 'https://api.qrserver.com/v1/create-qr-code/?size=900x900&data=' + qrCode;
-        const student = {
-            student_id: this.date,
+        const clase = {
+            clase_id: this.date,
             class: this.class,
             qrUrl: this.qrUrl,
             qrCode: qrCode
         };
         console.log(this.class);
-        this.studentsService.createStudent(student).then((result) => {
+        this.classesService.createClass(clase).then((result) => {
             alert('Pase de lista en curso...');
         });
         console.log(this.qrUrl);
     }
-    openStudent(student) {
+    openClase(clase) {
     }
-    saveStudent(){
-        this.studentsService.createStudent(this.student).then((result) => {
+    saveClase(){
+        this.classesService.createClass(this.clase).then((result) => {
             alert('Estudiante guardado con éxito');
         });
     }
-    editStudent(s){
-        this.student = s;
+    editClase(s){
+        this.clase = s;
     }
-    deleteStudent(s){
-        this.studentsService.deleteStudent(s).then(()=>{
+    deleteClase(s){
+        this.classesService.deleteClass(s).then(()=>{
             alert('Estudiante eliminado con éxito');
         });
     }

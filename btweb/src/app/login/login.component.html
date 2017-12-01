@@ -1,34 +1,32 @@
-<div class="center">
-    <img src="assets/bluetooth-3.png" id="about-logo" />
-</div>
-<br /><br />
-<div *ngIf="!isRegistered">
-    <label >Nombre</label>
-    <input type="text" [(ngModel)]="formHelper.name" value="">
-</div>
-<div *ngIf="!isRegistered">
-    <label >Escuela</label>
-    <input type="text" [(ngModel)]="formHelper.school" value="">
-</div>
-<div>
-    <label >Email</label>
-    <input type="email" [(ngModel)]="formHelper.email" value="">
-</div>
-<div>
-    <label >Contraseña</label>
-    <input type="password" [(ngModel)]="formHelper.password">
-</div>
-<div>
-    <div (click)="toggleRegistered()" class="center">
-        <b *ngIf="!isRegistered">Ya tienes cuenta? Ingresa!</b>
-        <b *ngIf="isRegistered">Aun no tienes cuenta? Regístrate!</b>
+<div class="col-md-offset-4 col-md-4">
+    <div *ngIf="!isRegistered">
+        <label >Nombre</label>
+        <input class="form-control" type="text" [(ngModel)]="formHelper.name" value="">
     </div>
-    <br />
-    <button (click)="ok()">Ok</button>
-    <hr />
-    <br />
-    <div class="center">
-        <b>ó</b>
+    <div *ngIf="!isRegistered">
+        <label >Escuela</label>
+        <input class="form-control" type="text" [(ngModel)]="formHelper.school" value="">
     </div>
-    <button (click)="loginWithFacebook()">Ingresar con Facebook</button>
+    <div>
+        <label >Email</label>
+        <input class="form-control" type="email" [(ngModel)]="formHelper.email" value="">
+    </div>
+    <div>
+        <label >Contraseña</label>
+        <input class="form-control" type="password" [(ngModel)]="formHelper.password">
+    </div>
+    <div>
+        <div (click)="toggleRegistered()" class="center">
+            <a *ngIf="!isRegistered">Ya tienes cuenta? Ingresa!</a>
+            <a *ngIf="isRegistered">Aun no tienes cuenta? Regístrate!</a>
+        </div>
+        <br />
+        <a class="btn btn-default btn-block" (click)="ok()">Ok</a>
+        <hr />
+        <br />
+        <div class="center">
+            <b>ó</b>
+        </div>
+        <a class="btn-primary btn btn-block" (click)="loginWithFacebook()">Ingresar con Facebook</a>
+    </div>
 </div>
