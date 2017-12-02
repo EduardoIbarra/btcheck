@@ -5,6 +5,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
+import {ScanPage} from "../pages/scan/scan";
 import {BLE} from "@ionic-native/ble";
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
@@ -35,6 +36,7 @@ export const firebaseConfig = {
     declarations: [
         MyApp,
         HomePage,
+        ScanPage,
         AttendancePage,
         TabsPage,
         ClassesPage,
@@ -55,6 +57,7 @@ export const firebaseConfig = {
     entryComponents: [
         MyApp,
         HomePage,
+        ScanPage,
         AttendancePage,
         TabsPage,
         ClassesPage,
