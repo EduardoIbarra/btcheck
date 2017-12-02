@@ -5,7 +5,6 @@ import {AttendancePage} from "../attendance/attendance";
 import {ClassesPage} from "../classes/classes";
 import {AboutPage} from "../about/about";
 import {ScanPage} from "../scan/scan";
-@IonicPage()
 @Component({
     selector: 'page-tabs',
     templateUrl: 'tabs.html',

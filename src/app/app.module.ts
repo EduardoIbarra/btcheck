@@ -22,6 +22,7 @@ import {AboutPage} from "../pages/about/about";
 import {AttendanceModalPage} from "../pages/attendance-modal/attendance-modal";
 import {LoginModalPage} from "../pages/login-modal/login-modal";
 import {AuthorizationService} from "../services/authorization.service";
+import {QRScanner} from "@ionic-native/qr-scanner";
 
 export const firebaseConfig = {
     apiKey: "AIzaSyClGHAxQZ_4h7h31tuLfrMxmPNeyskDWP8",
@@ -75,7 +76,8 @@ export const firebaseConfig = {
         StudentsService,
         ClassesService,
         AttendancesService,
-        AuthorizationService
+        AuthorizationService,
+        QRScanner
     ]
 })
 export class AppModule {}
