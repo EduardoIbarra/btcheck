@@ -4,6 +4,7 @@ import {HomePage} from "../home/home";
 import {AttendancePage} from "../attendance/attendance";
 import {ClassesPage} from "../classes/classes";
 import {AboutPage} from "../about/about";
+import {ScanPage} from "../scan/scan";
 @IonicPage()
 @Component({
     selector: 'page-tabs',
@@ -14,4 +15,5 @@ export class TabsPage {
     attendancePage = AttendancePage;
     classesPage = ClassesPage;
     aboutPage = AboutPage;
+    scanPage = ScanPage;
 }
