@@ -24,9 +24,7 @@ export class ScanPage {
           let scanSub = this.qrScanner.scan().subscribe((text: string) => {
             window.document.querySelector('ion-app').classList.remove('transparent-body');
             console.log('Scanned something', text);
-            let qrVal = text.split('||');
-            let tId = qrVal[0];
-            console.log(qrVal);
+            this.checkIn(text);
             flag = 1;
             this.qrScanner.hide(); // hide camera preview
             scanSub.unsubscribe(); // stop scanning
@@ -67,17 +65,21 @@ export class ScanPage {
 
     //setTimeout(this.setStatus.bind(this), 10000, 'Scan complete');
   }
-  checkIn(qrString){
-      let segments = qrString.splice('||');
-      this.attendancesService.getAttendanceForCheck(segments[0], segments[1])
-          .subscribe((response) => {
-            console.log(response);
-            const student = JSON.parse(localStorage.getItem('user'));
-            response.students.push(student);
-            this.attendancesService.editAttendance(response).then((result)=>{
-                console.log(result);
-                alert('Asistencia registrada');
-            });
-          });
+
+  checkIn(qrString)
+  {
+    let segments = qrString.split('||');
+    this.attendancesService.getAttendanceForCheck(segments[0], segments[1])
+      .subscribe((response) => {
+        console.log(response);
+        const student = JSON.parse(localStorage.getItem('user'));
+        response.students.push(student);
+        this.attendancesService.editAttendance(response).then((result) => {
+          console.log(result);
+          alert('Asistencia registrada');
+        });
+      });
   }
+
+
 }
