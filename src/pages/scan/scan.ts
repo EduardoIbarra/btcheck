@@ -25,7 +25,7 @@ export class ScanPage {
                     let scanSub = this.qrScanner.scan().subscribe((text: string) => {
                         window.document.querySelector('ion-app').classList.remove('transparent-body');
                         console.log('Scanned something', text);
-                        this.checkIn(text);
+                        this.checkQRIn(text);
                         flag = 1;
                         this.qrScanner.hide(); // hide camera preview
                         scanSub.unsubscribe(); // stop scanning
@@ -66,7 +66,7 @@ export class ScanPage {
 
         //setTimeout(this.setStatus.bind(this), 10000, 'Scan complete');
     }
-    checkIn(qrString)
+    checkQRIn(qrString)
     {
         let segments = qrString.split('||');
         this.attendancesService.getAttendanceForCheck(segments[0], segments[1])
