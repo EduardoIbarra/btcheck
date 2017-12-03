@@ -37,7 +37,8 @@ export class AttendanceComponent {
             attendance_id: this.date,
             class: this.class,
             qrUrl: this.qrUrl,
-            qrCode: qrCode
+            qrCode: qrCode,
+            students: []
         };
         console.log(this.class);
         this.attendancesService.createAttendance(attendance).then((result) => {

@@ -20,8 +20,8 @@ export class AttendancesService{
     public createAttendance(attendance){
         return this.afDB.database.ref(localStorage.getItem('uid')+'/'+'attendances/'+attendance.attendances_id).set(attendance);
     }
-    public editAttendance(attendance){
-        return this.afDB.database.ref(localStorage.getItem('uid')+'/'+'attendances/'+attendance.attendances_id).set(attendance);
+    public editAttendance(uid, attendance){
+        return this.afDB.database.ref(uid+'/'+'attendances/'+attendance.attendance_id).set(attendance);
     }
     public deleteAttendance(attendance){
         this.afDB.database.ref(localStorage.getItem('uid')+'/'+'attendances/'+attendance.attendances_id).remove();
