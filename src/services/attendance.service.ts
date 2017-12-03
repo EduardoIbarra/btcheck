@@ -14,6 +14,9 @@ export class AttendancesService{
     public getAttendance(id){
         return this.afDB.object(localStorage.getItem('uid')+'/'+'attendances/'+id);
     }
+    public getAttendanceForCheck(teacherId, id){
+        return this.afDB.object(teacherId+'/'+'attendances/'+id);
+    }
     public createAttendance(attendance){
         return this.afDB.database.ref(localStorage.getItem('uid')+'/'+'attendances/'+attendance.attendances_id).set(attendance);
     }

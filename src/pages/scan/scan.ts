@@ -2,6 +2,7 @@ import { Component, NgZone } from '@angular/core';
 import {NavController, AlertController} from 'ionic-angular';
 import { ToastController } from 'ionic-angular';
 import { QRScanner, QRScannerStatus } from '@ionic-native/qr-scanner';
+import {AttendancesService} from "../../services/attendance.service";
 
 
 
@@ -10,7 +11,8 @@ import { QRScanner, QRScannerStatus } from '@ionic-native/qr-scanner';
   templateUrl: 'scan.html',
 })
 export class ScanPage {
-  constructor(private qrScanner: QRScanner) { }
+  constructor(private qrScanner: QRScanner,
+              private  attendancesService: AttendancesService) { }
 
   scan() {
     this.qrScanner.prepare()
@@ -43,5 +45,12 @@ export class ScanPage {
       .catch((e: any) => console.log('Error is', e));
 
     //setTimeout(this.setStatus.bind(this), 10000, 'Scan complete');
+  }
+  checkIn(qrString){
+      let segments = qrString.splice('||');
+      this.attendancesService.getAttendanceForCheck(segments[0], segments[1])
+          .subscribe((response) => {
+            console.log(response);
+          });
   }
 }

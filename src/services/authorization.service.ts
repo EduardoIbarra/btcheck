@@ -19,10 +19,15 @@ export class AuthorizationService{
         return this.angularFireAuth.auth.signInWithPopup(new firebase.auth.FacebookAuthProvider());
     }
     addUserDetails(user, fbUser){
-        this.afDB.database.ref("users").child(fbUser.uid).set({name:user.name, school:user.school});
+        user.fbUserId = fbUser.uid;
+        this.afDB.database.ref("users").child(fbUser.uid).set(user);
+    }
+    public getUser(id){
+        return this.afDB.object('users/'+id);
     }
     public logout(){
         this.angularFireAuth.auth.signOut();
+        localStorage.removeItem('user');
     }
     public isLogged(){
         return this.angularFireAuth.authState;

@@ -75,8 +75,11 @@ export class LoginModalPage {
         this.authorizationService.signInWithEmailAndPassword(this.formHelper)
             .then((response) => {
                 alert('Loggeado Correctamente');
-                console.log(response);
                 localStorage.setItem('uid', response.uid);
+                this.authorizationService.getUser(response.uid).subscribe((response)=>{
+                    console.log(response);
+                    localStorage.setItem('user', JSON.stringify(response));
+                });
                 this.dismiss();
             })
             .catch((error) => {

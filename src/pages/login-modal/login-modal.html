@@ -12,8 +12,16 @@
     <br /><br />
     <ion-list>
         <ion-item *ngIf="!isRegistered">
+            <ion-label fixed>Matrícula</ion-label>
+            <ion-input type="text" [(ngModel)]="formHelper.school_id" value=""></ion-input>
+        </ion-item>
+        <ion-item *ngIf="!isRegistered">
             <ion-label fixed>Nombre</ion-label>
             <ion-input type="text" [(ngModel)]="formHelper.name" value=""></ion-input>
+        </ion-item>
+        <ion-item *ngIf="!isRegistered">
+            <ion-label fixed>Apellido</ion-label>
+            <ion-input type="text" [(ngModel)]="formHelper.lastName" value=""></ion-input>
         </ion-item>
         <ion-item *ngIf="!isRegistered">
             <ion-label fixed>Escuela</ion-label>
