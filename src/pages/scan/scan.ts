@@ -11,8 +11,7 @@ import {AttendancesService} from "../../services/attendance.service";
   templateUrl: 'scan.html',
 })
 export class ScanPage {
-  constructor(private qrScanner: QRScanner,
-              private  attendancesService: AttendancesService) { }
+  constructor(private qrScanner: QRScanner, private attendancesService: AttendancesService) { }
 
   scan() {
     this.qrScanner.prepare()
@@ -20,17 +19,39 @@ export class ScanPage {
         if (status.authorized) {
           // camera permission was granted
 
-
           // start scanning
+          let flag = 0;
           let scanSub = this.qrScanner.scan().subscribe((text: string) => {
+            window.document.querySelector('ion-app').classList.remove('transparent-body');
             console.log('Scanned something', text);
-
+            let qrVal = text.split('||');
+            let tId = qrVal[0];
+            console.log(qrVal);
+            flag = 1;
             this.qrScanner.hide(); // hide camera preview
             scanSub.unsubscribe(); // stop scanning
           });
 
           // show camera preview
-          this.qrScanner.show();
+
+          window.document.querySelector('ion-app').classList.add('transparent-body');
+          this.qrScanner.show()
+            .then((data : QRScannerStatus)=> {
+              console.log('datashowing', data.showing);
+              //alert(data.showing);
+            },err => {
+              //alert(err);
+
+            });
+
+          setTimeout(() => {
+            if(flag == 0){
+              window.document.querySelector('ion-app').classList.remove('transparent-body');
+              scanSub.unsubscribe(); // stop scanning
+              alert('Tiempo de espera excedido');
+              this.qrScanner.hide();
+            }
+          }, 5000);
 
           // wait for user to scan something, then the observable callback will be called
 
