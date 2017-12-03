@@ -3,7 +3,7 @@ import {NavController, AlertController} from 'ionic-angular';
 import { ToastController } from 'ionic-angular';
 import { QRScanner, QRScannerStatus } from '@ionic-native/qr-scanner';
 import {AttendancesService} from "../../services/attendance.service";
-
+import 'rxjs/add/operator/toPromise';
 
 
 @Component({
@@ -12,6 +12,7 @@ import {AttendancesService} from "../../services/attendance.service";
 })
 export class ScanPage {
     constructor(private qrScanner: QRScanner, private attendancesService: AttendancesService) {
+        //this.checkQRIn('y4SI88qdR8bMlb8up5fvcFrd1X22||1512340966058');
     }
 
     scan() {
@@ -69,9 +70,10 @@ export class ScanPage {
     checkQRIn(qrString)
     {
         let segments = qrString.split('||');
-        this.attendancesService.getAttendanceForCheck(segments[0], segments[1])
+        const firstObservable = this.attendancesService.getAttendanceForCheck(segments[0], segments[1])
             .subscribe((response) => {
                 console.log(response);
+                firstObservable.unsubscribe();
                 let student = JSON.parse(localStorage.getItem('user'));
                 student.timestamp = Date.now();
                 if(!response.students){
