@@ -72,6 +72,12 @@ export class ScanPage {
       this.attendancesService.getAttendanceForCheck(segments[0], segments[1])
           .subscribe((response) => {
             console.log(response);
+            const student = JSON.parse(localStorage.getItem('user'));
+            response.students.push(student);
+            this.attendancesService.editAttendance(response).then((result)=>{
+                console.log(result);
+                alert('Asistencia registrada');
+            });
           });
   }
 }

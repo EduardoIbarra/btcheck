@@ -21,7 +21,7 @@ export class AttendancesService{
         return this.afDB.database.ref(localStorage.getItem('uid')+'/'+'attendances/'+attendance.attendances_id).set(attendance);
     }
     public editAttendance(attendance){
-        this.afDB.database.ref(localStorage.getItem('uid')+'/'+'attendances/'+attendance.attendances_id).set(attendance);
+        return this.afDB.database.ref(localStorage.getItem('uid')+'/'+'attendances/'+attendance.attendances_id).set(attendance);
     }
     public deleteAttendance(attendance){
         this.afDB.database.ref(localStorage.getItem('uid')+'/'+'attendances/'+attendance.attendances_id).remove();
