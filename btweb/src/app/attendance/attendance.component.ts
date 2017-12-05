@@ -12,6 +12,7 @@ export class AttendanceComponent {
     class: any;
     date: number;
     qrUrl: string;
+    globalAttendance: any;
     constructor(
         public attendancesService: AttendancesService,
         public classesService: ClassesService
@@ -19,6 +20,7 @@ export class AttendanceComponent {
         attendancesService.getAttendances().valueChanges()
             .subscribe((result) => {
                 this.attendances = result;
+                console.log(this.attendances);
             }, (error) => {
                 alert('Ocurrió un error');
                 console.log(error);
@@ -26,7 +28,6 @@ export class AttendanceComponent {
         classesService.getClasses().valueChanges()
             .subscribe((result) => {
                 this.classes = result;
-                console.log(result);
             });
     }
     getQR() {
@@ -42,10 +43,16 @@ export class AttendanceComponent {
         };
         console.log(this.class);
         this.attendancesService.createAttendance(attendance).then((result) => {
-            alert('Pase de lista en curso...');
+            this.attendancesService.getAttendance(attendance.attendance_id)
+                .valueChanges().subscribe( (attendance) => {
+                    console.log(attendance);
+                    this.globalAttendance = attendance;
+                });
         });
         console.log(this.qrUrl);
     }
     openAttendance(attendance) {
+        this.globalAttendance = attendance;
+        this.class = this.globalAttendance.class;
     }
 }

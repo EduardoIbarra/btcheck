@@ -4,28 +4,53 @@
         <div class="row">
             <div class="col-md-8">
                 <select [(ngModel)]="class" class="form-control">
-                    <option *ngFor="let class of classes" [value]="class.class_id">{{class.name}}</option>
+                    <option *ngFor="let class of classes" [ngValue]="class">{{class.name}}</option>
                 </select>
             </div>
             <div class="col-md-4">
                 <a (click)="getQR()" class="btn btn-primary btn-block">Comenzar</a>
             </div>
         </div>
-        <div class="row" *ngIf="this.qrUrl">
+        <div class="row" *ngIf="globalAttendance">
             <div class="col-md-offset-4 col-md-4 center">
                 <br />
                 (Click en la imagen para agrandarla)
                 <div class="well">
-                    <a target="_blank" href="{{this.qrUrl}}"><img src="{{this.qrUrl}}" class="img-responsive" /></a>
+                    <a target="_blank" href="{{globalAttendance.qrUrl}}"><img src="{{globalAttendance.qrUrl}}" class="img-responsive" /></a>
                 </div>
             </div>
+            <hr *ngIf="globalAttendance.students" />
+            <table class="table table-bordered table-striped table-hover" *ngIf="globalAttendance.students">
+                <tr>
+                    <th>Matrícula</th>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>Cuando</th>
+                </tr>
+                <tr *ngFor="let s of globalAttendance.students">
+                    <td>{{s.school_id}}</td>
+                    <td>{{s.name}}</td>
+                    <td>{{s.lastName}}</td>
+                    <td>{{s.timestamp | date}}</td>
+                </tr>
+            </table>
         </div>
         <hr />
         <div>
-            <div *ngFor="let attendance of attendances" (click)="openAttendance({data: attendance})">
-                <h2>{{attendance.name}}</h2>
-                <p>{{attendance.attendances_id | date:'medium'}}</p>
-            </div>
+            <table class="table table-striped table-bordered table-hover">
+                <tr>
+                    <td>Clase</td>
+                    <td>Fecha</td>
+                    <td>Asistentes</td>
+                </tr>
+                <tr *ngFor="let attendance of attendances" (click)="openAttendance(attendance)">
+                    <td>{{attendance.class.name}}</td>
+                    <td>{{attendance.attendance_id | date}}</td>
+                    <td>
+                        <span *ngIf="attendance.students">{{attendance.students.length}}</span>
+                    </td>
+                </tr>
+            </table>
         </div>
     </div>
 </div>

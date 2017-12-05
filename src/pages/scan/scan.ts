@@ -5,16 +5,40 @@ import { QRScanner, QRScannerStatus } from '@ionic-native/qr-scanner';
 import {AttendancesService} from "../../services/attendance.service";
 import 'rxjs/add/operator/toPromise';
 
-
 @Component({
     selector: 'page-scan',
     templateUrl: 'scan.html',
 })
 export class ScanPage {
-    constructor(private qrScanner: QRScanner, private attendancesService: AttendancesService) {
-        //this.checkQRIn('y4SI88qdR8bMlb8up5fvcFrd1X22||1512340966058');
-    }
+    allEvents: any;
+    thisAttendance: any = null;
+    constructor(private qrScanner: QRScanner,
+                private attendancesService: AttendancesService,
+                public toastCtrl: ToastController,
+                private navController: NavController,) {
+        //this.checkQRIn('y4SI88qdR8bMlb8up5fvcFrd1X22||1512428600621');
 
+        this.navController.viewWillLeave.subscribe((e) => {
+            this.thisAttendance = null;
+            console.log('unloading attendance');
+        });
+        this.navController.viewDidLeave.subscribe((e) => {
+            this.thisAttendance = null;
+            console.log('unloading attendance');
+        });
+        this.navController.viewWillUnload.subscribe((e) => {
+            this.thisAttendance = null;
+            console.log('unloading attendance');
+        });
+    }
+    ionViewDidEnter() {
+        this.thisAttendance = null;
+        console.log('unloading attendance');
+    }
+    ionViewDidUnload() {
+        this.thisAttendance = null;
+        console.log('unloading attendance');
+    }
     scan() {
         this.qrScanner.prepare()
             .then((status: QRScannerStatus) => {
@@ -73,18 +97,26 @@ export class ScanPage {
         const firstObservable = this.attendancesService.getAttendanceForCheck(segments[0], segments[1])
             .subscribe((response) => {
                 console.log(response);
-                firstObservable.unsubscribe();
-                let student = JSON.parse(localStorage.getItem('user'));
-                student.timestamp = Date.now();
                 if(!response.students){
                     response.students = [];
                 }else{
                     response.students = Object.keys(response.students).map(function (key) { return response.students[key]; });
                 }
+                let student = JSON.parse(localStorage.getItem('user'));
+                if(response.students.filter((s)=>{ return s.school_id == student.school_id }).length > 0){
+                    alert('Tu asistencia ya había sido registrada previamente');
+                    return;
+                }
+                this.thisAttendance = response;
+                firstObservable.unsubscribe();
+                student.timestamp = Date.now();
                 response.students.push(student);
                 this.attendancesService.editAttendance(segments[0], response).then((result) => {
-                    console.log(result);
-                    alert('Asistencia registrada');
+                    let toast = this.toastCtrl.create({
+                        message: 'Asistencia Registrada Correctamente',
+                        duration: 3000
+                    });
+                    toast.present();
                 });
             });
     }

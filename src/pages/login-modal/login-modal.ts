@@ -64,6 +64,10 @@ export class LoginModalPage {
                 alert('Registrado Correctamente');
                 console.log(response);
                 localStorage.setItem('uid', response.uid);
+                this.authorizationService.getUser(response.uid).subscribe((response)=>{
+                    console.log(response);
+                    localStorage.setItem('user', JSON.stringify(response));
+                });
                 this.dismiss();
             })
             .catch((error) => {

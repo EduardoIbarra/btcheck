@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {IonicPage, ModalController, NavController, NavParams} from 'ionic-angular';
 import {AuthorizationService} from "../../services/authorization.service";
+import {LoginModalPage} from "../login-modal/login-modal";
+import {AttendancesService} from "../../services/attendance.service";
 
 /**
  * Generated class for the AboutPage page.
@@ -18,7 +20,35 @@ export class AboutPage {
 
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
+              public attendancesService: AttendancesService,
+              public modalCtrl: ModalController,
               public authorizationService: AuthorizationService) {
+      let modal = this.modalCtrl.create(LoginModalPage);
+      this.authorizationService.isLogged().subscribe((result) => {
+          if(result && result.uid){
+              console.log('User is logged in');
+          }else{
+              modal.present().then(() => {
+                  attendancesService.getAttendances()
+                      .subscribe((result)=>{
+                          console.log('User is logged in');
+                      }, (error)=>{
+                          alert('Ocurrió un error');
+                          console.log(error);
+                      });
+              })
+          }
+      }, (error) => {
+          modal.present().then(() => {
+              attendancesService.getAttendances()
+                  .subscribe((result)=>{
+                      console.log('User is logged in');
+                  }, (error)=>{
+                      alert('Ocurrió un error');
+                      console.log(error);
+                  });
+          })
+      });
   }
 
   ionViewDidLoad() {

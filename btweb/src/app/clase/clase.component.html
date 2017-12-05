@@ -27,7 +27,7 @@
                     <th></th>
                 </tr>
                 <tr *ngFor="let s of clases" class="center">
-                    <td>{{s.class_id}}</td>
+                    <td>{{s.clase_id || s.class_id}}</td>
                     <td>{{s.name}}</td>
                     <td>{{s.description}}</td>
                     <td><a (click)="editClase(s)"><span class="glyphicon glyphicon-edit"></span></a></td>

@@ -1,6 +1,6 @@
 {
   "name": "btdemo",
-  "app_id": "",
+  "app_id": "7a57a12b",
   "type": "ionic-angular",
   "integrations": {
     "cordova": {}

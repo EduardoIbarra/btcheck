@@ -15,7 +15,7 @@ export class ClassesService{
         return this.afDB.object(this.uid + '/' + 'classes/' + id);
     }
     public createClass(my_class){
-        return this.afDB.database.ref(this.uid + '/' + 'classes/' + my_class.class_id).set(my_class);
+        return this.afDB.database.ref(this.uid + '/' + 'classes/' + my_class.clase_id).set(my_class);
     }
     public editClass(my_class){
         this.afDB.database.ref(this.uid + '/' + 'classes/' + my_class.class_id).set(my_class);

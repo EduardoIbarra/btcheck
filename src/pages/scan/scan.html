@@ -3,14 +3,24 @@
     <ion-title>
       Escanear QR
     </ion-title>
-    <ion-buttons end>
-      <button ion-button (click)="scan()">
-        Escanear
-      </button>
-    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
-<ion-content>
+<ion-content padding>
+    <button ion-button block (click)="scan()" color="dark" icon-right="">
+        Confirmar Asistencia
+        <ion-icon name="qr-scanner"></ion-icon>
+    </button>
 
+    <ion-card *ngIf="thisAttendance">
+        <ion-card-header>
+            Información
+        </ion-card-header>
+        <ion-card-content>
+            <b>Status: </b> Asistencia Confirmada <br />
+            <b>Clase: </b> {{thisAttendance.class.name}}
+            <br />
+            <img src="{{thisAttendance.qrUrl}}" class="img-responsive" />
+        </ion-card-content>
+    </ion-card>
 </ion-content>

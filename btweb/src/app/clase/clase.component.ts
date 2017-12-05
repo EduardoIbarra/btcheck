@@ -51,6 +51,7 @@ export class ClaseComponent {
     openClase(clase) {
     }
     saveClase(){
+        this.clase.clase_id = Date.now();
         this.classesService.createClass(this.clase).then((result) => {
             alert('Estudiante guardado con éxito');
         });
